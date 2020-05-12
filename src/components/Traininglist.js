@@ -20,6 +20,17 @@ export default function Traininglist() {
     }, []);
 
 
+    function deleteCustomer(link) {
+        console.log(link)
+
+        if (window.confirm('Are you sure?')) {
+            fetch('https://customerrest.herokuapp.com/api/trainings/' + link, { method: 'DELETE' })
+                .then(_ => fetchData())
+                .catch(err => console.error(err))
+
+        }
+    }
+
 
     const columns = [{
         Header: 'Activity',
@@ -37,8 +48,15 @@ export default function Traininglist() {
     }, {
         Header: 'Lastname',
         accessor: 'customer.lastname'
+    }, {
+        filterable: false,
+        sortable: false,
+        width: 100,
+        Cell: row => (<Button color="secondary" size="small"
+            onClick={() => deleteCustomer(row.row._original.id)}>Delete</Button>)
+    }
 
-    }];
+    ];
 
 
     return (
