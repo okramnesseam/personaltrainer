@@ -27,7 +27,7 @@ function Addcustomer(props) {
     }
 
     const addCustomer = () => {
-        props.addNewCustomer(customer);
+        props.addCustomer(customer);
         handleClose();
     }
 
